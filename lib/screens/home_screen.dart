@@ -20,27 +20,36 @@ Persona persona = new Persona();
         appBar: AppBar(
           title: Text('DevProfile M3')
         ),
-        body: Center(
-          child: Container(
-            color: Colors.amber,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text('Full name: '+ persona.getName()),
-                Text('Email addres: '+ persona.getEmail()),
-                Text('Date of birth: '+ persona.getDate()),
-                
-                ElevatedButton(onPressed: (){
-                  Navigator.of(context).pushNamed('/personal');
-                }, child: Text('Personal Page')),
-                
-                ElevatedButton(onPressed: (){
-                  Navigator.of(context).pushNamed('/widget');
-                }, 
-                child: Text('Widget Page'))
-              ],
-            ),
-          ),         
+        body: Container(
+          color: Colors.amber,
+          child: Padding(
+            padding: EdgeInsets.all(20),
+            child: Container(
+              child: Column(
+                children: [
+                  Text('Full name: '+ persona.getName()),
+                  Divider(),
+                  Text('Email addres: '+ persona.getEmail()),
+                  Divider(),
+                  Text('Date of birth: '+ persona.getDate()),
+                  Divider(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ElevatedButton(onPressed: (){
+                        Navigator.of(context).pushNamed('/personal');
+                      }, child: Text('Personal Page')),
+                      
+                      ElevatedButton(onPressed: (){
+                        Navigator.of(context).pushNamed('/widget');
+                      }, 
+                      child: Text('Widget Page'))
+                        ]
+                  ),
+                ],
+              ),
+            ),         
+          ),
         ),
       );
   }
