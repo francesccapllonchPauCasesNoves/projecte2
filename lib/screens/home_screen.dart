@@ -1,6 +1,7 @@
 //He realitzat un statefull widget ja que aquest wiget anira cambiant perque va desplagant informacio actualitzada
 
 import 'package:flutter/material.dart';
+import 'package:projecte2/models/persona.dart';
 
 
 class HomeScreen extends StatefulWidget {
@@ -11,8 +12,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+Persona persona = new Persona();
 
-  
   @override
   Widget build(BuildContext context) {
       return Scaffold(
@@ -25,13 +26,18 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Full name: '+ 'Persona.nom'),
-                Text('Email addres: '+ 'Persona.email'),
-                Text('Date of birth: '+ 'Persona.birth'),
+                Text('Full name: '+ persona.getName()),
+                Text('Email addres: '+ persona.getEmail()),
+                Text('Date of birth: '+ persona.getDate()),
+                
                 ElevatedButton(onPressed: (){
-
+                  Navigator.of(context).pushNamed('/personal');
                 }, child: Text('Personal Page')),
-                ElevatedButton(onPressed: (){}, child: Text('Widget Page'))
+                
+                ElevatedButton(onPressed: (){
+                  Navigator.of(context).pushNamed('/widget');
+                }, 
+                child: Text('Widget Page'))
               ],
             ),
           ),         

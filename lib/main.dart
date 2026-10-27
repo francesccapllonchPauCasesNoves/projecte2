@@ -1,6 +1,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:projecte2/screens/home_screen.dart';
+import 'package:projecte2/screens/personal_screen.dart';
+import 'package:projecte2/screens/widget_screen.dart';
  
 void main() => runApp(MyApp());
  
@@ -16,6 +18,8 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         '/': (context) => HomeScreen(),
+        '/personal':(context) => PersonalScreen(),
+        '/widget': (context) => WidgetScreen()
         
       },
       initialRoute: '/',
