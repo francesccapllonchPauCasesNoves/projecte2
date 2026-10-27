@@ -30,7 +30,7 @@ class Persona {
   String setEmail(String email) => this.email = email;
   DateTime setDate(DateTime date) => this.date = date;
   
-
+  
   @override
   String toString() {
     // TODO: implement toString

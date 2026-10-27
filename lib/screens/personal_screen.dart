@@ -30,13 +30,15 @@ class _PersonalScreenState extends State<PersonalScreen> {
           Divider(),
           _editEmail(),
           Divider(),
+          _editDate(),
+          Divider(),
           _viewPassword(),
           Divider(),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ElevatedButton(onPressed: (){
-                Navigator.of(context, updatedPersona)
+                Navigator.of(context).pop(updatedPersona());
               }, child: Text('Save and return'))
             ],
           ),
@@ -82,6 +84,18 @@ class _PersonalScreenState extends State<PersonalScreen> {
 
   }
 
+  _editDate(){
+    return TextField(
+      textCapitalization: TextCapitalization.sentences,
+      decoration: InputDecoration(
+        labelText: 'Date: ',
+        helperText: 'Your actual date is: '+p.getDate() 
+      ),
+      onChanged: (value) => _date = value as DateTime
+    );
+
+  }
+
   _viewPassword(){
     return TextField(
       textCapitalization: TextCapitalization.sentences,
@@ -93,5 +107,11 @@ class _PersonalScreenState extends State<PersonalScreen> {
     );
   }
 
-
+  updatedPersona(){
+    if(_name.isEmpty || _last.isEmpty || _email.isEmpty)
+    p.setName(_name);
+    p.setLast(_last);
+    p.setEmail(_email);
+    //p.setDate(_date);
+  }
 }
