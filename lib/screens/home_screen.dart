@@ -12,8 +12,15 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-Persona persona = new Persona();
+  
 
+Persona personaActual = Persona(
+  'Raul', 
+  'Tomillo Berja', 
+  'rtb@gmail.com', 
+  'password', 
+  DateTime(2007,07,22));  
+  
   @override
   Widget build(BuildContext context) {
       return Scaffold(
@@ -27,24 +34,29 @@ Persona persona = new Persona();
             child: Container(
               child: Column(
                 children: [
-                  Text('Full name: '+ persona.getName()),
+                  Text('Full name: '+ personaActual.getName()),
                   Divider(),
-                  Text('Email addres: '+ persona.getEmail()),
+                  Text('Email addres: '+ personaActual.getEmail()),
                   Divider(),
-                  Text('Date of birth: '+ persona.getDate()),
+                  Text('Date of birth: '+ personaActual.getDate()),
                   Divider(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      ElevatedButton(onPressed: (){
-                        Navigator.of(context).pushNamed('/personal');
+                      ElevatedButton(onPressed: ()async{
+                        final personaEditada = await Navigator.of(context).pushNamed('/personal',arguments: personaActual);
+                        if(personaEditada != null){
+                          setState(() {
+                            personaActual = personaEditada as Persona;
+                          });
+                        }
                       }, child: Text('Personal Page')),
                       
                       ElevatedButton(onPressed: (){
                         Navigator.of(context).pushNamed('/widget');
                       }, 
                       child: Text('Widget Page'))
-                        ]
+                    ]
                   ),
                 ],
               ),

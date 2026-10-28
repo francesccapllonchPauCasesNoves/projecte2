@@ -4,10 +4,15 @@ class Persona {
   late String name,last,email,password;
   late DateTime date;
 
-  
-  
+  Persona(String name,last,email,password, DateTime date){
+    this.name = name;
+    this.last = last;
+    this.password = password;
+    this.email = email;
+    this.date = date;
+  }
 
-  Persona(){
+  Persona.initial(){
     this.name = 'Raul';
     this.last = 'Tomillo Berja';
     this.password = 'drowssap';
@@ -24,6 +29,7 @@ class Persona {
   String getDate(){
     return (date.day.toString()+' / '+date.month.toString()+' / '+date.year.toString());
   } 
+  DateTime getRawDate() => this.date;
 
   String setName(String name) => this.name = name;
   String setLast(String last) => this.last = last;
