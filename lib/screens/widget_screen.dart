@@ -9,6 +9,7 @@ class WidgetScreen extends StatefulWidget {
 
 class _WidgetScreenState extends State<WidgetScreen> {
   List<int> items = List<int>.generate(6,(int index)=> index);
+  List<int> itemsDone = [];
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,13 @@ class _WidgetScreenState extends State<WidgetScreen> {
         title: Text('Widget Screen'),
         backgroundColor: Colors.blueGrey,
       ),
-      body: ListView.builder(
+      body: Column(
+        children: [
+          Divider(),
+          Center( child: Text('Disponible Tasks')),
+          Divider(),
+          Expanded(
+            child: ListView.builder(
               itemCount: items.length,
               itemBuilder: (BuildContext context, int index){
                 return Dismissible(
@@ -38,9 +45,13 @@ class _WidgetScreenState extends State<WidgetScreen> {
                   ),
                   key: ValueKey<int>(items[index]),
                   onDismissed: (DismissDirection direction){
-                    setState(() {
-                      items.removeAt(index);
-                    });
+                    final seleccionat = items[index];
+                    if(direction == DismissDirection.endToStart){
+                      setState(() {
+                        itemsDone.add(seleccionat);
+                        items.removeAt(index);
+                      });
+                    }
                   },
                   child: ListTile(
                     title : Text(
@@ -52,6 +63,45 @@ class _WidgetScreenState extends State<WidgetScreen> {
                 );
               }
             ),
+          ),
+          Divider(),
+          Center( child: Text('Done Tasks')),
+          Divider(),
+          Expanded(
+            child: ListView.builder(
+              itemCount: itemsDone.length,
+              itemBuilder: (BuildContext context, int index){
+                return Dismissible(
+                  background: Container(
+                    alignment: Alignment.centerLeft,
+                    padding: EdgeInsets.only(left: 20.0), 
+                    color: Colors.red,
+                    child: Icon(Icons.cancel)
+                  ),
+                  
+                  key: ValueKey<int>(itemsDone[index]),
+                  onDismissed: (DismissDirection direction){
+                    final seleccionat = itemsDone[index];
+                    if(direction == DismissDirection.startToEnd){
+                      setState(() {
+                        items.add(seleccionat);
+                        itemsDone.removeAt(index);
+                      });
+                    }
+                  },
+                  child: ListTile(
+                    title : Text(
+                      'Item ${itemsDone[index] +1}'
+                    ),
+                    
+                  ),
+                  
+                );
+              }
+            ),
+          ),
+        ]
+      ),      
     );
   }
 }
