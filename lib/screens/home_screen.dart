@@ -25,10 +25,11 @@ Persona personaActual = Persona(
   Widget build(BuildContext context) {
       return Scaffold(
         appBar: AppBar(
-          title: Text('DevProfile M3')
+          title: Text('DevProfile M3'),
+          backgroundColor: Colors.indigoAccent,
         ),
         body: Container(
-          color: Colors.amber,
+          color: Colors.blueAccent,
           child: Padding(
             padding: EdgeInsets.all(20),
             child: Container(
