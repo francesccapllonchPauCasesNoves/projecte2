@@ -16,6 +16,7 @@ class _PersonalScreenState extends State<PersonalScreen> {
   late TextEditingController _emailController;
   late TextEditingController _dateController;
   late TextEditingController _passwordController;
+  late DateTime dataCanviada;
 
   bool _isInitalized = false;
 
@@ -62,7 +63,7 @@ class _PersonalScreenState extends State<PersonalScreen> {
               if(_nameController.text.isNotEmpty && 
               _lastController.text.isNotEmpty && 
               _emailController.text.isNotEmpty && 
-              _passwordController.text.isNotEmpty
+              _passwordController.text.isNotEmpty 
               ){
 
                 final Persona personaModificada = Persona(
@@ -70,7 +71,7 @@ class _PersonalScreenState extends State<PersonalScreen> {
                   _lastController.text, 
                   _emailController.text, 
                   _passwordController.text,
-                  persona.getRawDate()
+                  dataCanviada
                   );
 
                 Navigator.pop(context, personaModificada);              
@@ -155,6 +156,7 @@ class _PersonalScreenState extends State<PersonalScreen> {
     if(dataSeleccionada != null){
       setState(() {
         _dateController.text= "${dataSeleccionada.day}/${dataSeleccionada.month}/${dataSeleccionada.year}";
+        dataCanviada = dataSeleccionada;
       });
     }
 
