@@ -116,6 +116,7 @@ class _PersonalScreenState extends State<PersonalScreen> {
     return TextField(
       keyboardType: TextInputType.emailAddress,
       textCapitalization: TextCapitalization.sentences,
+      enableInteractiveSelection: true,
       controller: _emailController,
       decoration: InputDecoration(
         labelText: 'Email: ',
@@ -130,14 +131,32 @@ class _PersonalScreenState extends State<PersonalScreen> {
     return TextField(
       keyboardType: TextInputType.datetime,
       textCapitalization: TextCapitalization.sentences,
+      enableInteractiveSelection: false,
       controller: _dateController,
       readOnly: true,
       decoration: InputDecoration(
         labelText: 'Date: ',
         helperText: 'Your actual date is: '+_dateController.text 
       ),
-      onChanged: (value) => _dateController.text = value,
+      onTap: (){
+        _seleccionarData();
+      },
     );
+  }
+
+  Future<void> _seleccionarData() async{
+    DateTime? dataSeleccionada = await showDatePicker(
+      context: context,
+      initialDate: persona.getRawDate(), 
+      firstDate: DateTime(1990), 
+      lastDate: DateTime.now(),
+      );
+
+    if(dataSeleccionada != null){
+      setState(() {
+        _dateController.text= "${dataSeleccionada.day}/${dataSeleccionada.month}/${dataSeleccionada.year}";
+      });
+    }
 
   }
 

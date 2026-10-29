@@ -16,7 +16,6 @@ class _WidgetScreenState extends State<WidgetScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Widget Screen'),
-        backgroundColor: Colors.blueGrey,
       ),
       body: Column(
         children: [
@@ -24,16 +23,29 @@ class _WidgetScreenState extends State<WidgetScreen> {
           Center( child: Text('Disponible Tasks')),
           Divider(),
           Expanded(
-            child: ListView.builder(
+            child: ReorderableListView.builder(
               itemCount: items.length,
+              onReorderItem: (int oldIndex, int newIndex){
+                setState(() {
+                  
+                  final item = items.removeAt(oldIndex);
+                  items.insert(newIndex, item);
+                });
+              } ,
               itemBuilder: (BuildContext context, int index){
+                final item = items[index];
+
                 return Dismissible(
+                  
+                  key: ValueKey<int>(item),
+
                   background: Container(
                     alignment: Alignment.centerLeft,
                     padding: EdgeInsets.only(left: 20.0), 
                     color: Colors.red,
                     child: Icon(Icons.delete)
                   ),
+
                   secondaryBackground: Container(
                     color:Colors.green, 
                     alignment: Alignment.centerRight,
@@ -43,21 +55,22 @@ class _WidgetScreenState extends State<WidgetScreen> {
                       color: Colors.white
                     )
                   ),
-                  key: ValueKey<int>(items[index]),
+
                   onDismissed: (DismissDirection direction){
-                    final seleccionat = items[index];
-                    if(direction == DismissDirection.endToStart){
-                      setState(() {
-                        itemsDone.add(seleccionat);
-                        items.removeAt(index);
-                      });
-                    }
+                    final seleccionat = item;
+                      items.remove(item);
+                        setState(() {
+                          if(direction == DismissDirection.endToStart){
+                            itemsDone.add(seleccionat);
+                          }
+                        });
                   },
+
                   child: ListTile(
                     title : Text(
                       'Item ${items[index] +1}'
                     ),
-                    
+                    trailing: Icon(Icons.drag_handle), 
                   ),
                   
                 );
@@ -80,6 +93,9 @@ class _WidgetScreenState extends State<WidgetScreen> {
                   ),
                   
                   key: ValueKey<int>(itemsDone[index]),
+
+                  //bloqueja la direccio de esquerra a dreta
+                  direction: DismissDirection.startToEnd,
                   onDismissed: (DismissDirection direction){
                     final seleccionat = itemsDone[index];
                     if(direction == DismissDirection.startToEnd){
@@ -93,6 +109,8 @@ class _WidgetScreenState extends State<WidgetScreen> {
                     title : Text(
                       'Item ${itemsDone[index] +1}'
                     ),
+                    trailing: Icon(Icons.cancel),
+                    leading: Icon(Icons.check_circle_outline),
                     
                   ),
                   

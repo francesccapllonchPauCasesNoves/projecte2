@@ -24,44 +24,44 @@ Persona personaActual = Persona(
   @override
   Widget build(BuildContext context) {
       return Scaffold(
+        backgroundColor: Color.fromARGB(255, 234, 243, 252),
         appBar: AppBar(
           title: Text('DevProfile M3'),
-          backgroundColor: Colors.indigoAccent,
         ),
-        body: Container(
-          color: Colors.blueAccent,
-          child: Padding(
-            padding: EdgeInsets.all(20),
-            child: Container(
-              child: Column(
-                children: [
+        body: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(           
+            children: [
+              SizedBox(),
+              Container(
+                child: Column(
+                  children: [
                   Text('Full name: '+ personaActual.getName()),
-                  Divider(),
                   Text('Email addres: '+ personaActual.getEmail()),
-                  Divider(),
                   Text('Date of birth: '+ personaActual.getDate()),
-                  Divider(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ElevatedButton(onPressed: ()async{
-                        final personaEditada = await Navigator.of(context).pushNamed('/personal',arguments: personaActual);
-                        if(personaEditada != null){
-                          setState(() {
-                            personaActual = personaEditada as Persona;
-                          });
-                        }
-                      }, child: Text('Personal Page')),
-                      
-                      ElevatedButton(onPressed: (){
-                        Navigator.of(context).pushNamed('/widget');
-                      }, 
-                      child: Text('Widget Page'))
-                    ]
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),         
+              Divider(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(onPressed: ()async{
+                    final personaEditada = await Navigator.of(context).pushNamed('/personal',arguments: personaActual);
+                    if(personaEditada != null){
+                      setState(() {
+                        personaActual = personaEditada as Persona;
+                      });
+                    }
+                  }, child: Text('Personal Page')),
+                  
+                  ElevatedButton(onPressed: (){
+                    Navigator.of(context).pushNamed('/widget');
+                  }, 
+                  child: Text('Widget Page'))
+                ]
+              ),  
+            ]
           ),
         ),
       );
