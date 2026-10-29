@@ -1,3 +1,7 @@
+//Dins aquest widget la meva idea era realizar un enviament de dades dels usuari, 
+//per aixo vaig decidir que statefull seria una opció interesant, al final vaig canviar de idea
+//pero no ho descart com a canvi a futur
+
 import 'package:flutter/material.dart';
 
 class WidgetScreen extends StatefulWidget {

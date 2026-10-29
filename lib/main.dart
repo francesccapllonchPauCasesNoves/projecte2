@@ -1,4 +1,4 @@
-
+//He triat un statelesswidget perque es el predefinit a la pagina Myapp
 import 'package:flutter/material.dart';
 import 'package:projecte2/screens/home_screen.dart';
 import 'package:projecte2/screens/personal_screen.dart';

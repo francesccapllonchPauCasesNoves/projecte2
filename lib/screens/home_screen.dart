@@ -1,4 +1,5 @@
-//He realitzat un statefull widget ja que aquest wiget anira cambiant perque va desplagant informacio actualitzada
+//He realitzat un statefull widget ja que aquest wiget anira cambiant perque va desplagant 
+//informacio actualitzada
 
 import 'package:flutter/material.dart';
 import 'package:projecte2/models/persona.dart';
